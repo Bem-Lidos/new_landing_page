@@ -8,6 +8,7 @@ import communityImage from '../../assets/123.png'
 import headerLogo from '../../assets/PNG 2.png'
 import footerLogo from '../../assets/PNG 14.png'
 import bookIcon from '../../assets/PNG 7.png'
+import React from 'react';
 
 interface Feature {
   icon: React.ReactNode;
@@ -557,7 +558,7 @@ export default function LandingPage() {
                 </svg>
               </a>*/}
               <a
-                href='#'
+                href='https://github.com/Bem-Lidos'
                 className='hover:text-white transition-colors'
               >
                 <span className='sr-only'>GitHub</span>
@@ -575,7 +576,7 @@ export default function LandingPage() {
                 </svg>
               </a>
               <a
-                href='#'
+                href='https://www.instagram.com/bem.lidos/'
                 className='hover:text-white transition-colors'
               >
                 <span className='sr-only'>Instagram</span>
