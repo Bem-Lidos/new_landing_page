@@ -1,4 +1,4 @@
-import { BookOpen, Heart, MessageCircle, Shield, Sparkles, Star, TrendingUp, Users } from 'lucide-react'
+import { Heart, MessageCircle, Shield, Sparkles, Star, TrendingUp, Users } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
 import { Badge } from '../ui/badge'
@@ -8,7 +8,11 @@ import communityImage from '../../assets/123.png'
 import headerLogo from '../../assets/PNG 2.png'
 import footerLogo from '../../assets/PNG 14.png'
 import bookIcon from '../../assets/PNG 7.png'
-import React from 'react';
+import React, { useState } from 'react'
+import { toast } from 'sonner'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { Label } from '../ui/label'
+import { Input } from '../ui/input'
 
 interface Feature {
   icon: React.ReactNode;
@@ -24,13 +28,86 @@ interface Testimonial {
 }
 
 export default function LandingPage() {
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [formData, setFormData] = useState({
+    email: '',
+    fullName: '',
+  })
+
+  // Função para gerar username do email
+  const generateUsername = (email: string) => {
+    const baseUsername = email.split('@')[0].replace(/\./g, '_')
+    const randomNumbers = Math.floor(1000 + Math.random() * 9000) // Gera 4 dígitos aleatórios
+    return `${baseUsername}_${randomNumbers}`
+  }
+
+  // Função para gerar senha aleatória
+  const generatePassword = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let password = ''
+    for (let i = 0; i < 10; i++) {
+      password += chars.charAt(Math.floor(Math.random() * chars.length))
+    }
+    return password
+  }
+
+  // Função para dividir nome completo
+  const splitFullName = (fullName: string) => {
+    const parts = fullName.trim().split(' ')
+    const firstName = parts[0] || ''
+    const lastName = parts.slice(1).join(' ') || ''
+    return { firstName, lastName }
+  }
+
+  // Função de submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    const { firstName, lastName } = splitFullName(formData.fullName)
+    const username = generateUsername(formData.email)
+    const password = generatePassword()
+
+    const payload = {
+      username,
+      email: formData.email,
+      firstName,
+      lastName,
+      password,
+      enabled: true,
+      emailVerified: false,
+    }
+
+    try {
+      const response = await fetch('https://core-backend-znph.onrender.com/v1/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) throw new Error('Erro ao criar usuário')
+
+      const data = await response.json()
+      toast.success('Pré-cadastro realizado com sucesso!')
+      setOpen(false)
+      setFormData({ email: '', fullName: '' })
+    } catch (error) {
+      toast.error('Erro ao realizar pré-cadastro. Tente novamente.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const features: Feature[] = [
-     {
-       icon: <img src={bookIcon} alt="Gestão de Livros" className='w-8 h-8 object-cover' />,
-       title: 'Gestão de Livros',
-       description:
-         'Organize sua biblioteca pessoal com facilidade. Adicione, edite e gerencie todos os seus livros em um só lugar.',
-     },
+    {
+      icon: <img src={bookIcon} alt='Gestão de Livros' className='w-8 h-8 object-cover' />,
+      title: 'Gestão de Livros',
+      description:
+        'Organize sua biblioteca pessoal com facilidade. Adicione, edite e gerencie todos os seus livros em um só lugar.',
+    },
     {
       icon: <Star className='w-8 h-8 text-yellow-500' />,
       title: 'Avaliações e Reviews',
@@ -94,11 +171,11 @@ export default function LandingPage() {
       <header className='sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex justify-between items-center h-16'>
-             <div className='flex items-center gap-2'>
-               <div
-                 className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
-                 <img src={headerLogo} alt="BemLidos" className='w-10 h-10 object-cover' />
-               </div>
+            <div className='flex items-center gap-2'>
+              <div
+                className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
+                <img src={headerLogo} alt='BemLidos' className='w-10 h-10 object-cover' />
+              </div>
               <span className='text-2xl bg-gradient-to-r from-purple-600 to-orange-600 bg-clip-text text-transparent'>
                 BemLidos
               </span>
@@ -110,7 +187,7 @@ export default function LandingPage() {
               >
                 Funcionalidades
               </a>
-             {/* <a
+              {/* <a
                 href='#testimonials'
                 className='text-gray-600 hover:text-purple-600 transition-colors'
               >
@@ -168,14 +245,14 @@ export default function LandingPage() {
                     </p>
                   </div>
                 </div>
-                 <div className='flex items-center gap-2'>
-                   <img src={bookIcon} alt="Livros cadastrados" className='w-5 h-5 object-cover' />
-                   <div>
-                     <p className='text-sm text-gray-500'>
-                       Livros cadastrados
-                     </p>
-                   </div>
-                 </div>
+                <div className='flex items-center gap-2'>
+                  <img src={bookIcon} alt='Livros cadastrados' className='w-5 h-5 object-cover' />
+                  <div>
+                    <p className='text-sm text-gray-500'>
+                      Livros cadastrados
+                    </p>
+                  </div>
+                </div>
                 <div className='flex items-center gap-2'>
                   <Star className='w-5 h-5 text-yellow-500' />
                   <div>
@@ -321,7 +398,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-{/*
+      {/*
       <section id='testimonials' className='py-20 bg-white'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
@@ -383,10 +460,10 @@ export default function LandingPage() {
         <div
           className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-50"></div>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10'>
-           <div
-             className='w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-8'>
-             <img src={bookIcon} alt="BemLidos" className='w-10 h-10 object-cover' />
-           </div>
+          <div
+            className='w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-8'>
+            <img src={bookIcon} alt='BemLidos' className='w-10 h-10 object-cover' />
+          </div>
           <h2 className='text-4xl lg:text-5xl mb-6'>
             Pronto para transformar sua experiência de leitura?
           </h2>
@@ -395,9 +472,51 @@ export default function LandingPage() {
             a organizar sua biblioteca hoje mesmo.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-            <p className='text-purple-100 text-lg'>
-              Em breve você poderá baixar o aplicativo
-            </p>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button size='lg' variant='outline'
+                        className='bg-white text-purple-600 hover:bg-purple-50 border-0 text-lg px-8'>
+                  Fazer Pré-Cadastro
+                </Button>
+              </DialogTrigger>
+               <DialogContent className='w-[90vw] max-w-sm mx-auto'>
+                 <DialogHeader className='pb-2'>
+                   <DialogTitle className='text-lg'>Pré-Cadastro BemLidos</DialogTitle>
+                   <DialogDescription className='text-sm'>
+                     Faça seu pré-cadastro e seja um dos primeiros a usar o BemLidos!
+                   </DialogDescription>
+                 </DialogHeader>
+                 <form onSubmit={handleSubmit} className='space-y-3 py-2'>
+                   <div className='space-y-1'>
+                     <Label htmlFor='email' className='text-sm font-medium'>Email</Label>
+                     <Input
+                       id='email'
+                       type='email'
+                       placeholder='seu.email@example.com'
+                       value={formData.email}
+                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                       required
+                       className='h-9'
+                     />
+                   </div>
+                   <div className='space-y-1'>
+                     <Label htmlFor='fullName' className='text-sm font-medium'>Nome Completo</Label>
+                     <Input
+                       id='fullName'
+                       type='text'
+                       placeholder='João da Silva'
+                       value={formData.fullName}
+                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                       required
+                       className='h-9'
+                     />
+                   </div>
+                   <Button type='submit' className='w-full h-9 text-sm' disabled={loading}>
+                     {loading ? 'Cadastrando...' : 'Cadastrar'}
+                   </Button>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
           <p className='mt-8 text-purple-100'>
             Disponível em breve para iOS e Android
@@ -410,11 +529,11 @@ export default function LandingPage() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid md:grid-cols-4 gap-8'>
             <div className='md:col-span-1'>
-               <div className='flex items-center gap-2 mb-4'>
-                 <div
-                   className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
-                   <img src={footerLogo} alt="BemLidos" className='w-10 h-10 object-cover' />
-                 </div>
+              <div className='flex items-center gap-2 mb-4'>
+                <div
+                  className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
+                  <img src={footerLogo} alt='BemLidos' className='w-10 h-10 object-cover' />
+                </div>
                 <span className='text-xl text-white'>
                   BemLidos
                 </span>
@@ -435,7 +554,7 @@ export default function LandingPage() {
                     Funcionalidades
                   </a>
                 </li>
-               {/* <li>
+                {/* <li>
                   <a
                     href='#'
                     className='hover:text-white transition-colors'
