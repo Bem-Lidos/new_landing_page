@@ -80,7 +80,7 @@ export default function LandingPage() {
     }
 
     try {
-      const response = await fetch('https://core-backend-znph.onrender.com/v1/users', {
+      const response = await fetch('https://bemlidos.squareweb.app/v1/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -487,18 +487,7 @@ export default function LandingPage() {
                    </DialogDescription>
                  </DialogHeader>
                  <form onSubmit={handleSubmit} className='space-y-3 py-2'>
-                   <div className='space-y-1'>
-                     <Label htmlFor='email' className='text-sm font-medium'>Email</Label>
-                     <Input
-                       id='email'
-                       type='email'
-                       placeholder='seu.email@example.com'
-                       value={formData.email}
-                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                       required
-                       className='h-9'
-                     />
-                   </div>
+
                    <div className='space-y-1'>
                      <Label htmlFor='fullName' className='text-sm font-medium'>Nome Completo</Label>
                      <Input
@@ -507,6 +496,19 @@ export default function LandingPage() {
                        placeholder='João da Silva'
                        value={formData.fullName}
                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                       required
+                       className='h-9'
+                     />
+                   </div>
+
+                   <div className='space-y-1'>
+                     <Label htmlFor='email' className='text-sm font-medium'>Email</Label>
+                     <Input
+                       id='email'
+                       type='email'
+                       placeholder='seu.email@example.com'
+                       value={formData.email}
+                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                        required
                        className='h-9'
                      />
