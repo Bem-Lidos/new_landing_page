@@ -1,4 +1,4 @@
-import { Heart, MessageCircle, Shield, Sparkles, Star, TrendingUp, Users } from 'lucide-react'
+import { BookIcon, Heart, MessageCircle, Moon, Shield, Sparkles, Star, Sun, TrendingUp, Users } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
 import { Badge } from '../ui/badge'
@@ -7,12 +7,13 @@ import heroImage from '../../assets/5767803.png'
 import communityImage from '../../assets/123.png'
 import headerLogo from '../../assets/PNG 2.png'
 import footerLogo from '../../assets/PNG 14.png'
-import bookIcon from '../../assets/PNG 7.png'
-import React, { useState } from 'react'
+import bemlidosIcon from '../../assets/PNG 14.png'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
+import { Switch } from '../ui/switch'
 
 interface Feature {
   icon: React.ReactNode;
@@ -30,10 +31,41 @@ interface Testimonial {
 export default function LandingPage() {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme')
+      if (saved) {
+        return saved === 'dark'
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return false
+  })
   const [formData, setFormData] = useState({
     email: '',
     fullName: '',
   })
+
+  useEffect(() => {
+    const root = document.documentElement
+    if (isDark) {
+      root.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      root.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }, [isDark])
+
+  // Aplicar tema inicial na primeira renderização
+  useEffect(() => {
+    const root = document.documentElement
+    if (isDark) {
+      root.classList.add('dark')
+    } else {
+      root.classList.remove('dark')
+    }
+  }, [])
 
   // Função para gerar username do email
   const generateUsername = (email: string) => {
@@ -103,7 +135,7 @@ export default function LandingPage() {
 
   const features: Feature[] = [
     {
-      icon: <img src={bookIcon} alt='Gestão de Livros' className='w-8 h-8 object-cover' />,
+      icon: <BookIcon className='w-8 h-8 object-cover' />,
       title: 'Gestão de Livros',
       description:
         'Organize sua biblioteca pessoal com facilidade. Adicione, edite e gerencie todos os seus livros em um só lugar.',
@@ -166,9 +198,9 @@ export default function LandingPage() {
 
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-purple-50 via-white to-orange-50'>
+    <div className='min-h-screen bg-white dark:bg-gray-900'>
       {/* Header/Navigation */}
-      <header className='sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200'>
+      <header className='sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex justify-between items-center h-16'>
             <div className='flex items-center gap-2'>
@@ -176,29 +208,39 @@ export default function LandingPage() {
                 className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
                 <img src={headerLogo} alt='BemLidos' className='w-10 h-10 object-cover' />
               </div>
-              <span className='text-2xl bg-gradient-to-r from-purple-600 to-orange-600 bg-clip-text text-transparent'>
+              <span className='text-2xl text-purple-600 dark:text-purple-400'>
                 BemLidos
               </span>
             </div>
             <nav className='hidden md:flex items-center gap-8'>
               <a
                 href='#features'
-                className='text-gray-600 hover:text-purple-600 transition-colors'
+                className='text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               >
                 Funcionalidades
               </a>
               {/* <a
                 href='#testimonials'
-                className='text-gray-600 hover:text-purple-600 transition-colors'
+                className='text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               >
                 Depoimentos
               </a>*/}
               <a
                 href='#download'
-                className='text-gray-600 hover:text-purple-600 transition-colors'
+                className='text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               >
                 Download
               </a>
+              {/*<div className='flex items-center gap-2'>
+                <Sun className='w-4 h-4 text-gray-600 dark:text-gray-300' />
+                <Switch 
+                  checked={isDark} 
+                  onCheckedChange={(checked) => {
+                    setIsDark(checked)
+                  }} 
+                />
+                <Moon className='w-4 h-4 text-gray-600 dark:text-gray-300' />
+              </div>*/}
             </nav>
           </div>
         </div>
@@ -209,15 +251,15 @@ export default function LandingPage() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32'>
           <div className='grid lg:grid-cols-2 gap-12 items-center'>
             <div className='space-y-8'>
-              <Badge className='bg-purple-100 text-purple-700 hover:bg-purple-200 border-0'>
+              <Badge className='bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-900/50 border-0'>
                 <Sparkles className='w-3 h-3 mr-1' />
                 Novidade: Sistema de Recomendações IA
               </Badge>
               <h1
-                className='text-5xl lg:text-6xl bg-gradient-to-r from-purple-600 via-orange-600 to-purple-600 bg-clip-text text-transparent'>
+                className='text-5xl lg:text-6xl text-purple-600 dark:text-purple-400'>
                 Sua biblioteca pessoal na palma da mão
               </h1>
-              <p className='text-xl text-gray-600'>
+              <p className='text-xl text-gray-600 dark:text-gray-300'>
                 Organize seus livros, conecte-se com leitores
                 apaixonados e descubra sua próxima grande
                 leitura com o BemLidos.
@@ -226,7 +268,7 @@ export default function LandingPage() {
                 <Button
                   size='lg'
                   variant='outline'
-                  className='text-lg px-8 border-2 border-purple-200 hover:bg-purple-50'
+                  className='text-lg px-8 border-2 border-purple-200 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/30'
                   onClick={() =>
                     document
                       .getElementById('features')
@@ -238,17 +280,17 @@ export default function LandingPage() {
               </div>
               <div className='flex items-center gap-8 pt-4'>
                 <div className='flex items-center gap-2'>
-                  <Users className='w-5 h-5 text-purple-600' />
+                  <Users className='w-5 h-5 text-purple-600 dark:text-purple-400' />
                   <div>
-                    <p className='text-sm text-gray-500'>
+                    <p className='text-sm text-gray-500 dark:text-gray-400'>
                       Usuários ativos
                     </p>
                   </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                  <img src={bookIcon} alt='Livros cadastrados' className='w-5 h-5 object-cover' />
+                  <BookIcon className='w-5 h-5 object-cover' />
                   <div>
-                    <p className='text-sm text-gray-500'>
+                    <p className='text-sm text-gray-500 dark:text-gray-400'>
                       Livros cadastrados
                     </p>
                   </div>
@@ -256,7 +298,7 @@ export default function LandingPage() {
                 <div className='flex items-center gap-2'>
                   <Star className='w-5 h-5 text-yellow-500' />
                   <div>
-                    <p className='text-sm text-gray-500'>
+                    <p className='text-sm text-gray-500 dark:text-gray-400'>
                       Avaliação média
                     </p>
                   </div>
@@ -265,8 +307,8 @@ export default function LandingPage() {
             </div>
             <div className='relative'>
               <div
-                className='absolute inset-0 bg-gradient-to-r from-purple-400 to-orange-400 rounded-3xl blur-3xl opacity-20'></div>
-              <div className='relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white'>
+                className='absolute inset-0 bg-purple-200 rounded-3xl blur-3xl opacity-20'></div>
+              <div className='relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800'>
                 <ImageWithFallback
                   src={heroImage}
                   alt='BemLidos App Preview'
@@ -279,17 +321,17 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id='features' className='py-20 bg-white'>
+      <section id='features' className='py-20 bg-white dark:bg-gray-900'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
-            <Badge className='bg-purple-100 text-purple-700 hover:bg-purple-200 border-0 mb-4'>
+            <Badge className='bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-900/50 border-0 mb-4'>
               Funcionalidades
             </Badge>
             <h2
-              className='text-4xl lg:text-5xl bg-gradient-to-r from-purple-600 to-orange-600 bg-clip-text text-transparent mb-4'>
+              className='text-4xl lg:text-5xl text-purple-600 dark:text-purple-400 mb-4'>
               Tudo que você precisa em um só lugar
             </h2>
-            <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
+            <p className='text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto'>
               Descubra todas as ferramentas que vão revolucionar
               sua experiência de leitura
             </p>
@@ -299,16 +341,16 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className='p-6 hover:shadow-xl transition-all duration-300 border-2 border-gray-100 hover:border-purple-200 group'
+                className='p-6 hover:shadow-xl transition-all duration-300 border-2 border-gray-100 dark:border-gray-700 hover:border-purple-200 dark:hover:border-purple-600 group bg-white dark:bg-gray-800'
               >
                 <div
-                  className='w-14 h-14 rounded-xl bg-gradient-to-br from-purple-50 to-orange-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform'>
+                  className='w-14 h-14 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform'>
                   {feature.icon}
                 </div>
-                <h3 className='text-xl mb-2'>
+                <h3 className='text-xl mb-2 text-gray-900 dark:text-white'>
                   {feature.title}
                 </h3>
-                <p className='text-gray-600'>
+                <p className='text-gray-600 dark:text-gray-300'>
                   {feature.description}
                 </p>
               </Card>
@@ -318,13 +360,13 @@ export default function LandingPage() {
       </section>
 
       {/* Community Section */}
-      <section className='py-20 bg-gradient-to-br from-purple-50 to-orange-50'>
+      <section className='py-20 bg-gray-50 dark:bg-gray-800'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid lg:grid-cols-2 gap-12 items-center'>
             <div className='relative order-2 lg:order-1'>
               <div
-                className='absolute inset-0 bg-gradient-to-r from-orange-400 to-purple-400 rounded-3xl blur-3xl opacity-20'></div>
-              <div className='relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white'>
+                className='absolute inset-0 bg-orange-200 rounded-3xl blur-3xl opacity-20'></div>
+              <div className='relative rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800'>
                 <ImageWithFallback
                   src={communityImage}
                   alt='Community'
@@ -333,14 +375,14 @@ export default function LandingPage() {
               </div>
             </div>
             <div className='space-y-6 order-1 lg:order-2'>
-              <Badge className='bg-orange-100 text-orange-700 hover:bg-orange-200 border-0'>
+              <Badge className='bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 hover:bg-orange-200 dark:hover:bg-orange-900/50 border-0'>
                 Comunidade
               </Badge>
               <h2
-                className='text-4xl lg:text-5xl bg-gradient-to-r from-orange-600 to-purple-600 bg-clip-text text-transparent'>
+                className='text-4xl lg:text-5xl text-purple-600 dark:text-purple-400'>
                 Conecte-se com leitores apaixonados
               </h2>
-              <p className='text-xl text-gray-600'>
+              <p className='text-xl text-gray-600 dark:text-gray-300'>
                 Participe de discussões enriquecedoras,
                 compartilhe suas opiniões e descubra novas
                 perspectivas sobre seus livros favoritos.
@@ -348,14 +390,14 @@ export default function LandingPage() {
               <div className='space-y-4'>
                 <div className='flex items-start gap-4'>
                   <div
-                    className='w-10 h-10 rounded-lg bg-gradient-to-br from-orange-600 to-purple-600 flex items-center justify-center flex-shrink-0'>
+                    className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
                     <MessageCircle className='w-5 h-5 text-white' />
                   </div>
                   <div>
-                    <h3 className='text-lg mb-1'>
+                    <h3 className='text-lg mb-1 text-gray-900 dark:text-white'>
                       Discussões Profundas
                     </h3>
-                    <p className='text-gray-600'>
+                    <p className='text-gray-600 dark:text-gray-300'>
                       Crie e participe de tópicos sobre qualquer
                       livro ou tema literário.
                     </p>
@@ -363,14 +405,14 @@ export default function LandingPage() {
                 </div>
                 <div className='flex items-start gap-4'>
                   <div
-                    className='w-10 h-10 rounded-lg bg-gradient-to-br from-purple-600 to-orange-600 flex items-center justify-center flex-shrink-0'>
+                    className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
                     <Users className='w-5 h-5 text-white' />
                   </div>
                   <div>
-                    <h3 className='text-lg mb-1'>
+                    <h3 className='text-lg mb-1 text-gray-900 dark:text-white'>
                       Comunidade Ativa
                     </h3>
-                    <p className='text-gray-600'>
+                    <p className='text-gray-600 dark:text-gray-300'>
                       Faça parte de uma comunidade engajada de
                       amantes da leitura.
                     </p>
@@ -378,14 +420,14 @@ export default function LandingPage() {
                 </div>
                 <div className='flex items-start gap-4'>
                   <div
-                    className='w-10 h-10 rounded-lg bg-gradient-to-br from-orange-600 to-purple-600 flex items-center justify-center flex-shrink-0'>
+                    className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
                     <TrendingUp className='w-5 h-5 text-white' />
                   </div>
                   <div>
-                    <h3 className='text-lg mb-1'>
+                    <h3 className='text-lg mb-1 text-gray-900 dark:text-white'>
                       Descubra Tendências
                     </h3>
-                    <p className='text-gray-600'>
+                    <p className='text-gray-600 dark:text-gray-300'>
                       Fique por dentro dos livros mais
                       comentados e tendências literárias.
                     </p>
@@ -399,17 +441,17 @@ export default function LandingPage() {
 
       {/* Testimonials Section */}
       {/*
-      <section id='testimonials' className='py-20 bg-white'>
+      <section id='testimonials' className='py-20 bg-white dark:bg-gray-900'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-16'>
             <Badge className='bg-purple-100 text-purple-700 hover:bg-purple-200 border-0 mb-4'>
               Depoimentos
             </Badge>
             <h2
-              className='text-4xl lg:text-5xl bg-gradient-to-r from-purple-600 to-orange-600 bg-clip-text text-transparent mb-4'>
+              className='text-4xl lg:text-5xl text-purple-600 mb-4'>
               O que nossos usuários dizem
             </h2>
-            <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
+            <p className='text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto'>
               Milhares de leitores já transformaram sua
               experiência de leitura com o BemLidos
             </p>
@@ -431,16 +473,16 @@ export default function LandingPage() {
                     ),
                   )}
                 </div>
-                <p className='text-gray-600 mb-6'>
+                <p className='text-gray-600 dark:text-gray-300 mb-6'>
                   {testimonial.comment}
                 </p>
                 <div className='flex items-center gap-3'>
                   <div
-                    className='w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-orange-400 flex items-center justify-center text-white'>
+                    className='w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white'>
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <p className='text-gray-600'>
+                    <p className='text-gray-600 dark:text-gray-300'>
                       {testimonial.role}
                     </p>
                   </div>
@@ -455,19 +497,19 @@ export default function LandingPage() {
       {/* Download/CTA Section */}
       <section
         id='download'
-        className='py-20 bg-gradient-to-br from-purple-600 via-orange-600 to-purple-600 text-white relative overflow-hidden'
+        className='py-20 bg-orange-50 dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden'
       >
         <div
           className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-50"></div>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10'>
           <div
-            className='w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-8'>
-            <img src={bookIcon} alt='BemLidos' className='w-10 h-10 object-cover' />
+            className='w-20 h-20 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-8'>
+            <img src={bemlidosIcon} className='object-cover' />
           </div>
-          <h2 className='text-4xl lg:text-5xl mb-6'>
+          <h2 className='text-4xl lg:text-5xl mb-6 text-purple-600 dark:text-purple-400'>
             Pronto para transformar sua experiência de leitura?
           </h2>
-          <p className='text-xl mb-8 text-purple-100'>
+          <p className='text-xl mb-8 text-purple-600 dark:text-purple-300'>
             Junte-se a milhares de leitores apaixonados e comece
             a organizar sua biblioteca hoje mesmo.
           </p>
@@ -475,21 +517,21 @@ export default function LandingPage() {
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
                 <Button size='lg' variant='outline'
-                        className='bg-white text-purple-600 hover:bg-purple-50 border-0 text-lg px-8'>
+                        className='bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 border-0 text-lg px-8'>
                   Fazer Pré-Cadastro
                 </Button>
               </DialogTrigger>
-               <DialogContent className='w-[90vw] max-w-sm mx-auto'>
-                 <DialogHeader className='pb-2'>
-                   <DialogTitle className='text-lg'>Pré-Cadastro BemLidos</DialogTitle>
-                   <DialogDescription className='text-sm'>
+               <DialogContent className='w-[95vw] max-w-lg sm:max-w-xl mx-auto p-6 sm:p-8'>
+                 <DialogHeader className='pb-4'>
+                   <DialogTitle className='text-xl sm:text-2xl'>Pré-Cadastro BemLidos</DialogTitle>
+                   <DialogDescription className='text-sm sm:text-base'>
                      Faça seu pré-cadastro e seja um dos primeiros a usar o BemLidos!
                    </DialogDescription>
                  </DialogHeader>
-                 <form onSubmit={handleSubmit} className='space-y-3 py-2'>
+                 <form onSubmit={handleSubmit} className='space-y-4 py-2'>
 
-                   <div className='space-y-1'>
-                     <Label htmlFor='fullName' className='text-sm font-medium'>Nome Completo</Label>
+                   <div className='space-y-2'>
+                     <Label htmlFor='fullName' className='text-sm sm:text-base font-medium'>Nome Completo</Label>
                      <Input
                        id='fullName'
                        type='text'
@@ -497,12 +539,12 @@ export default function LandingPage() {
                        value={formData.fullName}
                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                        required
-                       className='h-9'
+                       className='h-11 sm:h-12 text-base'
                      />
                    </div>
 
-                   <div className='space-y-1'>
-                     <Label htmlFor='email' className='text-sm font-medium'>Email</Label>
+                   <div className='space-y-2'>
+                     <Label htmlFor='email' className='text-sm sm:text-base font-medium'>Email</Label>
                      <Input
                        id='email'
                        type='email'
@@ -510,24 +552,24 @@ export default function LandingPage() {
                        value={formData.email}
                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                        required
-                       className='h-9'
+                       className='h-11 sm:h-12 text-base'
                      />
                    </div>
-                   <Button type='submit' className='w-full h-9 text-sm' disabled={loading}>
+                   <Button type='submit' className='w-full h-11 sm:h-12 text-base font-medium' disabled={loading}>
                      {loading ? 'Cadastrando...' : 'Cadastrar'}
                    </Button>
                 </form>
               </DialogContent>
             </Dialog>
           </div>
-          <p className='mt-8 text-purple-100'>
+          <p className='mt-8 text-gray-600 dark:text-gray-400'>
             Disponível em breve para iOS e Android
           </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className='bg-gray-900 text-gray-400 py-12'>
+      <footer className='bg-orange-50 dark:bg-gray-900 text-gray-700 dark:text-gray-200 py-12'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid md:grid-cols-4 gap-8'>
             <div className='md:col-span-1'>
@@ -536,22 +578,22 @@ export default function LandingPage() {
                   className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
                   <img src={footerLogo} alt='BemLidos' className='w-10 h-10 object-cover' />
                 </div>
-                <span className='text-xl text-white'>
+                <span className='text-xl text-gray-900 dark:text-white'>
                   BemLidos
                 </span>
               </div>
-              <p className='text-sm'>
+              <p className='text-sm text-gray-700 dark:text-gray-200'>
                 Sua biblioteca pessoal na palma da mão.
                 Conecte-se, organize e descubra.
               </p>
             </div>
             <div>
-              <h3 className='text-white mb-4'>Produto</h3>
+              <h3 className='text-gray-900 dark:text-white mb-4'>Produto</h3>
               <ul className='space-y-2 text-sm'>
                 <li>
                   <a
                     href='#features'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Funcionalidades
                   </a>
@@ -559,7 +601,7 @@ export default function LandingPage() {
                 {/* <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Preços
                   </a>
@@ -567,7 +609,7 @@ export default function LandingPage() {
                 <li>
                   <a
                     href='#download'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Download
                   </a>
@@ -575,7 +617,7 @@ export default function LandingPage() {
                 {/*<li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Atualizações
                   </a>
@@ -583,12 +625,12 @@ export default function LandingPage() {
               </ul>
             </div>
             <div>
-              <h3 className='text-white mb-4'>Empresa</h3>
+              <h3 className='text-gray-900 dark:text-white mb-4'>Empresa</h3>
               <ul className='space-y-2 text-sm'>
                 <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Sobre
                   </a>
@@ -596,7 +638,7 @@ export default function LandingPage() {
                 {/*<li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Blog
                   </a>
@@ -604,7 +646,7 @@ export default function LandingPage() {
                 {/*<li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Carreiras
                   </a>
@@ -612,7 +654,7 @@ export default function LandingPage() {
                 <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Contato
                   </a>
@@ -625,7 +667,7 @@ export default function LandingPage() {
                 <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Privacidade
                   </a>
@@ -633,7 +675,7 @@ export default function LandingPage() {
                 <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Termos
                   </a>
@@ -641,7 +683,7 @@ export default function LandingPage() {
                 <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Cookies
                   </a>
@@ -649,7 +691,7 @@ export default function LandingPage() {
                 <li>
                   <a
                     href='#'
-                    className='hover:text-white transition-colors'
+                    className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   >
                     Licenças
                   </a>
@@ -658,14 +700,14 @@ export default function LandingPage() {
             </div>*/}
           </div>
           <div
-            className='border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4'>
-            <p className='text-sm'>
+            className='border-t border-gray-300 dark:border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4'>
+            <p className='text-sm text-gray-700 dark:text-gray-200'>
               © 2025 BemLidos. Todos os direitos reservados.
             </p>
             <div className='flex gap-6'>
               {/*<a
                 href='#'
-                className='hover:text-white transition-colors'
+                className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               >
                 <span className='sr-only'>Twitter</span>
                 <svg
@@ -680,7 +722,7 @@ export default function LandingPage() {
               </a>*/}
               <a
                 href='https://github.com/Bem-Lidos'
-                className='hover:text-white transition-colors'
+                className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               >
                 <span className='sr-only'>GitHub</span>
                 <svg
@@ -698,7 +740,7 @@ export default function LandingPage() {
               </a>
               <a
                 href='https://www.instagram.com/bem.lidos/'
-                className='hover:text-white transition-colors'
+                className='hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               >
                 <span className='sr-only'>Instagram</span>
                 <svg
