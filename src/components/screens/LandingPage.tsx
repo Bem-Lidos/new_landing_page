@@ -1,4 +1,4 @@
-import { BookIcon, Heart, MessageCircle, Moon, Shield, Sparkles, Star, Sun, TrendingUp, Users } from 'lucide-react'
+import { BookIcon, Heart, MessageCircle, Shield, Sparkles, Star, TrendingUp, Users } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Card } from '../ui/card'
 import { Badge } from '../ui/badge'
@@ -13,7 +13,6 @@ import { toast } from 'sonner'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
-import { Switch } from '../ui/switch'
 
 interface Feature {
   icon: React.ReactNode;
@@ -32,14 +31,13 @@ export default function LandingPage() {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isDark, setIsDark] = useState(() => {
+    // Dark mode sempre como padrão
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme')
-      if (saved) {
-        return saved === 'dark'
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
+      const root = document.documentElement
+      root.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
     }
-    return false
+    return true
   })
   const [formData, setFormData] = useState({
     email: '',
@@ -231,16 +229,6 @@ export default function LandingPage() {
               >
                 Download
               </a>
-              {/*<div className='flex items-center gap-2'>
-                <Sun className='w-4 h-4 text-gray-600 dark:text-gray-300' />
-                <Switch 
-                  checked={isDark} 
-                  onCheckedChange={(checked) => {
-                    setIsDark(checked)
-                  }} 
-                />
-                <Moon className='w-4 h-4 text-gray-600 dark:text-gray-300' />
-              </div>*/}
             </nav>
           </div>
         </div>
@@ -347,7 +335,7 @@ export default function LandingPage() {
                   className='w-14 h-14 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform'>
                   {feature.icon}
                 </div>
-                <h3 className='text-xl mb-2 text-gray-900 dark:text-white'>
+                <h3 className='text-xl mb-2 text-gray-900 dark:text-black'>
                   {feature.title}
                 </h3>
                 <p className='text-gray-600 dark:text-gray-300'>
@@ -391,10 +379,10 @@ export default function LandingPage() {
                 <div className='flex items-start gap-4'>
                   <div
                     className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
-                    <MessageCircle className='w-5 h-5 text-white' />
+                    <MessageCircle className='w-5 h-5 text-black' />
                   </div>
                   <div>
-                    <h3 className='text-lg mb-1 text-gray-900 dark:text-white'>
+                    <h3 className='text-lg mb-1 text-gray-900 dark:text-black'>
                       Discussões Profundas
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300'>
@@ -406,10 +394,10 @@ export default function LandingPage() {
                 <div className='flex items-start gap-4'>
                   <div
                     className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
-                    <Users className='w-5 h-5 text-white' />
+                    <Users className='w-5 h-5 text-black' />
                   </div>
                   <div>
-                    <h3 className='text-lg mb-1 text-gray-900 dark:text-white'>
+                    <h3 className='text-lg mb-1 text-gray-900 dark:text-black'>
                       Comunidade Ativa
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300'>
@@ -421,10 +409,10 @@ export default function LandingPage() {
                 <div className='flex items-start gap-4'>
                   <div
                     className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
-                    <TrendingUp className='w-5 h-5 text-white' />
+                    <TrendingUp className='w-5 h-5 text-black' />
                   </div>
                   <div>
-                    <h3 className='text-lg mb-1 text-gray-900 dark:text-white'>
+                    <h3 className='text-lg mb-1 text-gray-900 dark:text-black'>
                       Descubra Tendências
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300'>
@@ -478,7 +466,7 @@ export default function LandingPage() {
                 </p>
                 <div className='flex items-center gap-3'>
                   <div
-                    className='w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white'>
+                    className='w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-black'>
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
@@ -497,10 +485,8 @@ export default function LandingPage() {
       {/* Download/CTA Section */}
       <section
         id='download'
-        className='py-20 bg-orange-50 dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden'
+        className='py-20 bg-orange-50 dark:bg-gray-900 text-gray-900 dark:text-black relative overflow-hidden'
       >
-        <div
-          className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-50"></div>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10'>
           <div
             className='w-20 h-20 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-8'>
@@ -569,7 +555,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className='bg-orange-50 dark:bg-gray-900 text-gray-700 dark:text-gray-200 py-12'>
+      <footer className='bg-orange-50 dark:bg-gray-500 text-gray-500 dark:text-gray-200 py-12'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='grid md:grid-cols-4 gap-8'>
             <div className='md:col-span-1'>
@@ -578,17 +564,17 @@ export default function LandingPage() {
                   className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
                   <img src={footerLogo} alt='BemLidos' className='w-10 h-10 object-cover' />
                 </div>
-                <span className='text-xl text-gray-900 dark:text-white'>
+                <span className='text-xl text-gray-500 dark:text-black'>
                   BemLidos
                 </span>
               </div>
-              <p className='text-sm text-gray-700 dark:text-gray-200'>
+              <p className='text-sm text-gray-500 dark:text-gray-200'>
                 Sua biblioteca pessoal na palma da mão.
                 Conecte-se, organize e descubra.
               </p>
             </div>
             <div>
-              <h3 className='text-gray-900 dark:text-white mb-4'>Produto</h3>
+              <h3 className='text-gray-500 dark:text-black mb-4'>Produto</h3>
               <ul className='space-y-2 text-sm'>
                 <li>
                   <a
@@ -625,7 +611,7 @@ export default function LandingPage() {
               </ul>
             </div>
             <div>
-              <h3 className='text-gray-900 dark:text-white mb-4'>Empresa</h3>
+              <h3 className='text-gray-900 dark:text-black mb-4'>Empresa</h3>
               <ul className='space-y-2 text-sm'>
                 <li>
                   <a
@@ -662,7 +648,7 @@ export default function LandingPage() {
               </ul>
             </div>
             {/*<div>
-              <h3 className='text-white mb-4'>Legal</h3>
+              <h3 className='text-black mb-4'>Legal</h3>
               <ul className='space-y-2 text-sm'>
                 <li>
                   <a
