@@ -1,16 +1,26 @@
-'use client'
+'use client';
+import { CTA } from './components/sections/CTA';
+import { Features } from './components/sections/Features';
+import { Footer } from './components/sections/Footer';
+import { Hero } from './components/sections/Hero';
+import { HowItWorks } from './components/sections/HowItWorks';
+import { Navigation } from './components/sections/Navigation';
+import { Pricing } from './components/sections/Pricing';
+import { Stats } from './components/sections/Stats';
+import { Testimonials } from './components/sections/Testimonials';
 
-import { Header, HeroSection, FeaturesSection, CommunitySection, DownloadSection, Footer } from "@/app/components/landing";
-
-export default function Home() {
+export default function App() {
     return (
-        <main className="min-h-screen bg-white dark:bg-gray-900">
-            <Header />
-            <HeroSection />
-            <FeaturesSection />
-            <CommunitySection />
-            <DownloadSection />
+        <div className="min-h-screen bg-background">
+            <Navigation />
+            <Hero />
+            <Stats />
+            <Features />
+            <HowItWorks />
+            <Testimonials />
+            <Pricing />
+            <CTA />
             <Footer />
-        </main>
+        </div>
     );
 }

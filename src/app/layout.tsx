@@ -1,9 +1,14 @@
 import "@/app/globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Toaster } from "@/app/components/ui/sonner";
+import { ThemeProvider } from "@/app/components/ThemeProvider";
 import { Metadata } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+    weight: ['300', '400', '500', '600', '700', '800'],
+    subsets: ["latin"],
+    display: 'swap',
+});
 
 export const metadata: Metadata = {
     title: "BemLidos - Sua Biblioteca Pessoal",
@@ -12,10 +17,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="pt-br" className="dark">
-            <body className={inter.className}>
-                {children}
-                <Toaster position="top-center" />
+        <html lang="pt-br" suppressHydrationWarning>
+            <body className={poppins.className}>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    {children}
+                    <Toaster position="top-center" />
+                </ThemeProvider>
             </body>
         </html>
     );
