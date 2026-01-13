@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { Poppins } from "next/font/google";
 import { Toaster } from "@/app/components/ui/sonner";
+import { ThemeProvider } from "@/app/components/ThemeProvider";
 import { Metadata } from "next";
 
 const poppins = Poppins({
@@ -16,10 +17,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="pt-br">
+        <html lang="pt-br" suppressHydrationWarning>
             <body className={poppins.className}>
-                {children}
-                <Toaster position="top-center" />
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    {children}
+                    <Toaster position="top-center" />
+                </ThemeProvider>
             </body>
         </html>
     );

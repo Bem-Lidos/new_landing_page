@@ -2,50 +2,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* Light mode colors */
-  --color-border: #e5e5e5;
-  --color-input: #e5e5e5;
-  --color-ring: #910281;
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-primary: #910281;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #E76006;
-  --color-secondary-foreground: #ffffff;
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #ffffff;
-  --color-muted: #f5f5f5;
-  --color-muted-foreground: #737373;
-  --color-accent: #f5f5f5;
-  --color-accent-foreground: #0a0a0a;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #0a0a0a;
-  --color-card: #ffffff;
-  --color-card-foreground: #0a0a0a;
-}
-
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-border: #262626;
-    --color-input: #262626;
-    --color-ring: #c180ba;
-    --color-background: #0a0a0a;
-    --color-foreground: #fafafa;
-    --color-primary: #c180ba;
-    --color-primary-foreground: #0a0a0a;
-    --color-secondary: #f48246;
-    --color-secondary-foreground: #0a0a0a;
-    --color-destructive: #dc2626;
-    --color-destructive-foreground: #fafafa;
-    --color-muted: #262626;
-    --color-muted-foreground: #a3a3a3;
-    --color-accent: #262626;
-    --color-accent-foreground: #fafafa;
-    --color-popover: #171717;
-    --color-popover-foreground: #fafafa;
-    --color-card: #171717;
-    --color-card-foreground: #fafafa;
-  }
+  /* Tailwind colors mapped to CSS variables */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 }
 
 :root {

@@ -5,6 +5,7 @@ import { Input } from './components/Input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './components/Card';
 import { Badge } from './components/Badge';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
+import { ThemeToggle } from './components/ThemeToggle';
 import {
     BookOpen,
     Sparkles,
@@ -158,6 +159,7 @@ export default function App() {
 
                         {/* Desktop CTA */}
                         <div className="hidden md:flex items-center gap-3">
+                            <ThemeToggle />
                             <Button variant="ghost" size="sm">Entrar</Button>
                             <Button variant="primary" size="sm">
                                 Começar Grátis
@@ -165,14 +167,17 @@ export default function App() {
                             </Button>
                         </div>
 
-                        {/* Mobile Menu Button */}
-                        <button
-                            className="md:hidden p-2 text-foreground"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                        </button>
+                        {/* Mobile Menu Button and Theme Toggle */}
+                        <div className="flex md:hidden items-center gap-2">
+                            <ThemeToggle />
+                            <button
+                                className="p-2 text-foreground"
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            </button>
+                        </div>
                     </div>
 
                     {/* Mobile Menu */}
