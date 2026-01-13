@@ -1,5 +1,7 @@
 import React from 'react'
-import headerLogo from '@/assets/PNG 2.png'
+import Image from 'next/image'
+import Link from 'next/link'
+import headerLogo from '@/assets/PNG-2.png'
 
 export default function Header() {
   return (
@@ -8,30 +10,30 @@ export default function Header() {
         <div className='flex justify-between items-center h-16'>
           <div className='flex items-center gap-2'>
             <div className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
-              <img src={headerLogo} alt='BemLidos' className='w-10 h-10 object-cover' />
+              <Image src={headerLogo} alt='BemLidos' width={40} height={40} className='object-cover' />
             </div>
-            <span 
-              className='text-2xl font-semibold dark:text-white' 
+            <span
+              className='text-2xl font-semibold dark:text-white'
               style={{ color: '#000000' }}
             >
               BemLidos
             </span>
           </div>
           <nav className='hidden md:flex items-center gap-8'>
-            <a
+            <Link
               href='#features'
               className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               style={{ color: '#000000' }}
             >
               Funcionalidades
-            </a>
-            <a
+            </Link>
+            <Link
               href='#download'
               className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
               style={{ color: '#000000' }}
             >
               Download
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

@@ -1,12 +1,13 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { Button } from '../ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { usePreRegistration } from '../../../hooks/usePreRegistration'
-import bemlidosIcon from '@/assets/PNG 14.png'
+import bemlidosIcon from '@/assets/PNG-14.png'
 
 export function DownloadSection() {
   const { open, setOpen, loading, formData, setFormData, handleSubmit } = usePreRegistration()
@@ -18,7 +19,7 @@ export function DownloadSection() {
     >
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10'>
         <div className='w-20 h-20 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-8'>
-          <img src={bemlidosIcon} className='object-cover' alt='BemLidos' />
+          <Image src={bemlidosIcon} width={80} height={80} className='object-cover' alt='BemLidos' />
         </div>
         <h2 className='text-4xl lg:text-5xl mb-6 dark:text-white' style={{ color: '#000000' }}>
           Pronto para transformar sua experiência de leitura?

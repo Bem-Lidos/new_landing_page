@@ -1,5 +1,7 @@
 import React from 'react'
-import bemlidosIcon from '@/assets/PNG 14.png'
+import Image from 'next/image'
+import Link from 'next/link'
+import bemlidosIcon from '@/assets/PNG-14.png'
 
 export function Footer() {
   return (
@@ -9,7 +11,7 @@ export function Footer() {
           <div className='md:col-span-1'>
             <div className='flex items-center gap-2 mb-4'>
               <div className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
-                <img src={bemlidosIcon} alt='BemLidos' className='w-10 h-10 object-cover' />
+                <Image src={bemlidosIcon} alt='BemLidos' width={40} height={40} className='object-cover' />
               </div>
               <span className='text-xl dark:text-white' style={{ color: '#000000' }}>
                 BemLidos
@@ -24,22 +26,22 @@ export function Footer() {
             <h3 className='dark:text-white mb-4' style={{ color: '#000000' }}>Produto</h3>
             <ul className='space-y-2 text-sm'>
               <li>
-                <a
+                <Link
                   href='#features'
                   className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   style={{ color: '#000000' }}
                 >
                   Funcionalidades
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href='#download'
                   className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   style={{ color: '#000000' }}
                 >
                   Download
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -47,22 +49,22 @@ export function Footer() {
             <h3 className='dark:text-white mb-4' style={{ color: '#000000' }}>Empresa</h3>
             <ul className='space-y-2 text-sm'>
               <li>
-                <a
+                <Link
                   href='#'
                   className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   style={{ color: '#000000' }}
                 >
                   Sobre
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href='#'
                   className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
                   style={{ color: '#000000' }}
                 >
                   Contato
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
