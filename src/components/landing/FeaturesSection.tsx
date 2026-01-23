@@ -1,4 +1,3 @@
-import React from 'react'
 import { BookIcon, Heart, MessageCircle, Shield, Sparkles, Star } from 'lucide-react'
 import { Card } from '../ui/card'
 import { Badge } from '../ui/badge'
@@ -59,7 +58,7 @@ export function FeaturesSection() {
           <h2 className='text-4xl lg:text-5xl text-purple-600 dark:text-purple-400 mb-4'>
             Tudo que você precisa em um só lugar
           </h2>
-          <p className='text-xl dark:text-white max-w-2xl mx-auto' style={{ color: '#000000' }}>
+          <p className='text-xl dark:text-white max-w-2xl mx-auto text-black'>
             Descubra todas as ferramentas que vão revolucionar
             sua experiência de leitura
           </p>
@@ -74,10 +73,10 @@ export function FeaturesSection() {
               <div className='w-14 h-14 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform'>
                 {feature.icon}
               </div>
-              <h3 className='text-xl mb-2 dark:text-white' style={{ color: '#000000' }}>
+              <h3 className='text-xl mb-2 dark:text-white text-black'>
                 {feature.title}
               </h3>
-              <p className='dark:text-white' style={{ color: '#000000' }}>
+              <p className='dark:text-white text-black'>
                 {feature.description}
               </p>
             </Card>
@@ -87,4 +86,3 @@ export function FeaturesSection() {
     </section>
   )
 }
-

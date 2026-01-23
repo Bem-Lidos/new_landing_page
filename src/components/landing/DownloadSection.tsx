@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from '../ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Label } from '../ui/label'
@@ -12,13 +11,13 @@ export function DownloadSection() {
   return (
     <section
       id='download'
-      className='py-20 bg-orange-50 dark:bg-gray-900 text-gray-900 dark:text-black relative overflow-hidden'
+      className='py-20 bg-orange-50 dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden'
     >
       <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10'>
         <div className='w-20 h-20 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-8'>
           <img src={bemlidosIcon} className='object-cover' alt='BemLidos' />
         </div>
-        <h2 className='text-4xl lg:text-5xl mb-6 dark:text-white' style={{ color: '#000000' }}>
+        <h2 className='text-4xl lg:text-5xl mb-6 dark:text-white text-black'>
           Pronto para transformar sua experiência de leitura?
         </h2>
         <p className='text-xl mb-8 text-purple-600 dark:text-purple-300'>
@@ -30,7 +29,7 @@ export function DownloadSection() {
             <DialogTrigger asChild>
               <Button
                 size='lg'
-                className='text-lg px-8 !bg-purple-600 dark:!bg-purple-500 !text-white hover:!bg-purple-700 dark:hover:!bg-purple-600'
+                className='text-lg px-8 bg-purple-600! dark:bg-purple-500! text-white hover:bg-purple-700! dark:hover:bg-purple-600!'
                 style={{
                   backgroundColor: '#7C3AED',
                   color: '#FFFFFF',
@@ -83,11 +82,10 @@ export function DownloadSection() {
             </DialogContent>
           </Dialog>
         </div>
-        <p className='mt-8 dark:text-white' style={{ color: '#000000' }}>
+        <p className='mt-8 dark:text-white text-black'>
           Disponível em breve para iOS e Android
         </p>
       </div>
     </section>
   )
 }
-

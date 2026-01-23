@@ -1,4 +1,3 @@
-import React from 'react'
 import { BookIcon, Sparkles, Star, Users } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Badge } from '../ui/badge'
@@ -18,7 +17,7 @@ export function HeroSection() {
             <h1 className='text-5xl lg:text-6xl text-purple-600 dark:text-purple-400'>
               Sua biblioteca pessoal na palma da mão
             </h1>
-            <p className='text-xl dark:text-white' style={{ color: '#000000' }}>
+            <p className='text-xl dark:text-white text-black text-justify'>
               Organize seus livros, conecte-se com leitores
               apaixonados e descubra sua próxima grande
               leitura com o BemLidos.
@@ -26,7 +25,7 @@ export function HeroSection() {
             <div className='flex flex-col sm:flex-row gap-4'>
               <Button
                 size='lg'
-                className='text-lg px-8 !bg-purple-600 dark:!bg-purple-500 !text-white hover:!bg-purple-700 dark:hover:!bg-purple-600'
+                className='text-lg px-8 bg-purple-600! dark:bg-purple-500! text-white hover:bg-purple-700! dark:hover:bg-purple-600!'
                 style={{
                   backgroundColor: '#7C3AED',
                   color: '#FFFFFF',
@@ -44,7 +43,7 @@ export function HeroSection() {
               <div className='flex items-center gap-2'>
                 <Users className='w-5 h-5 text-purple-600 dark:text-purple-400' />
                 <div>
-                  <p className='text-sm dark:text-white' style={{ color: '#000000' }}>
+                  <p className='text-sm dark:text-white text-black'>
                     Usuários ativos
                   </p>
                 </div>
@@ -52,7 +51,7 @@ export function HeroSection() {
               <div className='flex items-center gap-2'>
                 <BookIcon className='w-5 h-5 text-purple-600 dark:text-purple-400' />
                 <div>
-                  <p className='text-sm dark:text-white' style={{ color: '#000000' }}>
+                  <p className='text-sm dark:text-white text-black'>
                     Livros cadastrados
                   </p>
                 </div>
@@ -60,7 +59,7 @@ export function HeroSection() {
               <div className='flex items-center gap-2'>
                 <Star className='w-5 h-5 text-yellow-500' />
                 <div>
-                  <p className='text-sm dark:text-white' style={{ color: '#000000' }}>
+                  <p className='text-sm dark:text-white text-black'>
                     Avaliação média
                   </p>
                 </div>
@@ -82,4 +81,3 @@ export function HeroSection() {
     </section>
   )
 }
-

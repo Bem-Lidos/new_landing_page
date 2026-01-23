@@ -1,9 +1,8 @@
-import React from 'react'
 import bemlidosIcon from '../../assets/PNG 14.png'
 
 export function Footer() {
   return (
-    <footer className='bg-orange-50 dark:bg-gray-500 text-gray-500 dark:text-gray-200 py-12'>
+    <footer className='bg-orange-50 dark:bg-gray-800 text-gray-500 dark:text-gray-200 py-12 '>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid md:grid-cols-4 gap-8'>
           <div className='md:col-span-1'>
@@ -11,23 +10,22 @@ export function Footer() {
               <div className='w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center'>
                 <img src={bemlidosIcon} alt='BemLidos' className='w-10 h-10 object-cover' />
               </div>
-              <span className='text-xl dark:text-white' style={{ color: '#000000' }}>
+              <span className='text-xl dark:text-white text-black'>
                 BemLidos
               </span>
             </div>
-            <p className='text-sm dark:text-white' style={{ color: '#000000' }}>
+            <p className='text-sm dark:text-white text-black'>
               Sua biblioteca pessoal na palma da mão.
               Conecte-se, organize e descubra.
             </p>
           </div>
           <div>
-            <h3 className='dark:text-white mb-4' style={{ color: '#000000' }}>Produto</h3>
+            <h3 className='dark:text-white mb-4 text-black'>Produto</h3>
             <ul className='space-y-2 text-sm'>
               <li>
                 <a
                   href='#features'
-                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
-                  style={{ color: '#000000' }}
+                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
                 >
                   Funcionalidades
                 </a>
@@ -35,8 +33,7 @@ export function Footer() {
               <li>
                 <a
                   href='#download'
-                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
-                  style={{ color: '#000000' }}
+                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
                 >
                   Download
                 </a>
@@ -44,13 +41,12 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className='dark:text-white mb-4' style={{ color: '#000000' }}>Empresa</h3>
+            <h3 className='dark:text-white mb-4 text-black'>Empresa</h3>
             <ul className='space-y-2 text-sm'>
               <li>
                 <a
                   href='#'
-                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
-                  style={{ color: '#000000' }}
+                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
                 >
                   Sobre
                 </a>
@@ -58,8 +54,7 @@ export function Footer() {
               <li>
                 <a
                   href='#'
-                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
-                  style={{ color: '#000000' }}
+                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
                 >
                   Contato
                 </a>
@@ -68,14 +63,13 @@ export function Footer() {
           </div>
         </div>
         <div className='border-t border-gray-300 dark:border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4'>
-          <p className='text-sm dark:text-white' style={{ color: '#000000' }}>
-            © 2025 BemLidos. Todos os direitos reservados.
+          <p className='text-sm dark:text-white text-black'>
+            © {new Date().getFullYear()} BemLidos. Todos os direitos reservados.
           </p>
           <div className='flex gap-6'>
             <a
               href='https://github.com/Bem-Lidos'
-              className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
-              style={{ color: '#000000' }}
+              className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -95,8 +89,7 @@ export function Footer() {
             </a>
             <a
               href='https://www.instagram.com/bem.lidos/'
-              className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors'
-              style={{ color: '#000000' }}
+              className='dark:text-white  hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -120,4 +113,3 @@ export function Footer() {
     </footer>
   )
 }
-

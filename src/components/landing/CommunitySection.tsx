@@ -1,4 +1,3 @@
-import React from 'react'
 import { MessageCircle, TrendingUp, Users } from 'lucide-react'
 import { Badge } from '../ui/badge'
 import { ImageWithFallback } from '../figma/ImageWithFallback'
@@ -26,49 +25,49 @@ export function CommunitySection() {
             <h2 className='text-4xl lg:text-5xl text-purple-600 dark:text-purple-400'>
               Conecte-se com leitores apaixonados
             </h2>
-            <p className='text-xl dark:text-white' style={{ color: '#000000' }}>
+            <p className='text-xl dark:text-white text-black'>
               Participe de discussões enriquecedoras,
               compartilhe suas opiniões e descubra novas
               perspectivas sobre seus livros favoritos.
             </p>
             <div className='space-y-4'>
               <div className='flex items-start gap-4'>
-                <div className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
-                  <MessageCircle className='w-5 h-5 text-black' />
+                <div className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center shrink-0'>
+                  <MessageCircle className='w-5 h-5 text-white' />
                 </div>
                 <div>
-                  <h3 className='text-lg mb-1 dark:text-white' style={{ color: '#000000' }}>
+                  <h3 className='text-lg mb-1 dark:text-white text-black'>
                     Discussões Profundas
                   </h3>
-                  <p className='dark:text-white' style={{ color: '#000000' }}>
+                  <p className='dark:text-white text-black'>
                     Crie e participe de tópicos sobre qualquer
                     livro ou tema literário.
                   </p>
                 </div>
               </div>
               <div className='flex items-start gap-4'>
-                <div className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
-                  <Users className='w-5 h-5 text-black' />
+                <div className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center shrink-0'>
+                  <Users className='w-5 h-5 text-white' />
                 </div>
                 <div>
-                  <h3 className='text-lg mb-1 dark:text-white' style={{ color: '#000000' }}>
+                  <h3 className='text-lg mb-1 dark:text-white text-black'>
                     Comunidade Ativa
                   </h3>
-                  <p className='dark:text-white' style={{ color: '#000000' }}>
+                  <p className='dark:text-white text-black'>
                     Faça parte de uma comunidade engajada de
                     amantes da leitura.
                   </p>
                 </div>
               </div>
               <div className='flex items-start gap-4'>
-                <div className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center flex-shrink-0'>
-                  <TrendingUp className='w-5 h-5 text-black' />
+                <div className='w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center shrink-0'>
+                  <TrendingUp className='w-5 h-5 text-white' />
                 </div>
                 <div>
-                  <h3 className='text-lg mb-1 dark:text-white' style={{ color: '#000000' }}>
+                  <h3 className='text-lg mb-1 dark:text-white text-black'>
                     Descubra Tendências
                   </h3>
-                  <p className='dark:text-white' style={{ color: '#000000' }}>
+                  <p className='dark:text-white text-black'>
                     Fique por dentro dos livros mais
                     comentados e tendências literárias.
                   </p>
@@ -81,4 +80,3 @@ export function CommunitySection() {
     </section>
   )
 }
-
