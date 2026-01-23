@@ -1,4 +1,3 @@
-'use client';
 import { CTA } from './components/sections/CTA';
 import { Features } from './components/sections/Features';
 import { Footer } from './components/sections/Footer';
@@ -11,7 +10,7 @@ import { Testimonials } from './components/sections/Testimonials';
 
 export default function App() {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background" suppressHydrationWarning>
             <Navigation />
             <Hero />
             <Stats />
