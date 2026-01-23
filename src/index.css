@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --color-*: initial;
-  --color-primary: oklch(0.6 0.2 280);
-}
-
 html {
   scroll-behavior: smooth;
-}
-
-html.dark {
-  color-scheme: dark;
 }

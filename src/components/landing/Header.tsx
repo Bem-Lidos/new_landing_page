@@ -1,5 +1,4 @@
 import headerLogo from '../../assets/PNG 2.png'
-import { ThemeToggle } from '../ui/theme-toggle'
 
 export function Header() {
   return (
@@ -16,20 +15,19 @@ export function Header() {
               BemLidos
             </span>
           </div>
-          <nav className='flex items-center gap-8'>
+          <nav className='hidden md:flex items-center gap-8'>
             <a
               href='#features'
-              className='hidden md:block dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
+              className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
             >
               Funcionalidades
             </a>
             <a
               href='#download'
-              className='hidden md:block dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
+              className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
             >
               Download
             </a>
-            <ThemeToggle />
           </nav>
         </div>
       </div>
