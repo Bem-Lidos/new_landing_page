@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import bemlidosIcon from '../../assets/PNG 14.png'
 
 export function Footer() {
@@ -24,7 +25,7 @@ export function Footer() {
             <ul className='space-y-2 text-sm'>
               <li>
                 <a
-                  href='#features'
+                  href='/#features'
                   className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
                 >
                   Funcionalidades
@@ -32,7 +33,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href='#download'
+                  href='/#download'
                   className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
                 >
                   Download
@@ -58,6 +59,14 @@ export function Footer() {
                 >
                   Contato
                 </a>
+              </li>
+              <li>
+                <Link
+                  to='/privacy'
+                  className='dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-black'
+                >
+                  Política de privacidade
+                </Link>
               </li>
             </ul>
           </div>
