@@ -19,18 +19,12 @@ export function usePreRegistration() {
     e.preventDefault()
     setLoading(true)
 
-    const { firstName, lastName } = splitFullName(formData.fullName)
-    const username = generateUsername(formData.email)
     const password = generatePassword()
 
     const payload = {
-      username,
       email: formData.email,
-      firstName,
-      lastName,
+      name: formData.fullName,
       password,
-      enabled: true,
-      emailVerified: false,
     }
 
     try {
