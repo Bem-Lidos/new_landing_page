@@ -81,6 +81,23 @@ export function DownloadSection() {
               </form>
             </DialogContent>
           </Dialog>
+          <Button
+            asChild
+            size='lg'
+            className='text-lg cursor-pointer px-8 bg-purple-600! dark:bg-purple-500! text-white hover:bg-purple-700! dark:hover:bg-purple-600!'
+            style={{
+              backgroundColor: '#7C3AED',
+              color: '#FFFFFF',
+            }}
+          >
+            <a
+              href='https://play.google.com/store/apps/details?id=br.com.bemlidos.user_app'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Ir para Play Store
+            </a>
+          </Button>
         </div>
         <p className='mt-8 dark:text-white text-black'>
           Disponível em breve para iOS e Android
